@@ -1,5 +1,11 @@
 # @elf-framework/icon
 
+## 2.0.49
+
+### Patch Changes
+
+- split icon package from elf-framework/editor
+
 ## 2.0.48
 
 ### Patch Changes
