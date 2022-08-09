@@ -1,5 +1,11 @@
 # @elf-framework/icon
 
+## 2.0.50
+
+### Patch Changes
+
+- add dependencies
+
 ## 2.0.49
 
 ### Patch Changes
