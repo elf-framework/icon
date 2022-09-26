@@ -1,5 +1,77 @@
 # @elf-framework/icon
 
+## 2.0.62
+
+### Patch Changes
+
+- update file category
+
+## 2.0.61
+
+### Patch Changes
+
+- update icon list
+
+## 2.0.60
+
+### Patch Changes
+
+- update Common actions category icons
+
+## 2.0.59
+
+### Patch Changes
+
+- update material-icons svg version
+
+## 2.0.58
+
+### Patch Changes
+
+- support Photo&Image category
+
+## 2.0.57
+
+### Patch Changes
+
+- add Text Formatting category, remove UI actions
+
+## 2.0.56
+
+### Patch Changes
+
+- add UI actions category
+
+## 2.0.55
+
+### Patch Changes
+
+- remove exports in package.json
+
+## 2.0.54
+
+### Patch Changes
+
+- support root object files
+
+## 2.0.53
+
+### Patch Changes
+
+- update exports in package.json
+
+## 2.0.52
+
+### Patch Changes
+
+- remove unsed file
+
+## 2.0.51
+
+### Patch Changes
+
+- update export file - package.json
+
 ## 2.0.50
 
 ### Patch Changes

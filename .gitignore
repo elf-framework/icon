@@ -2,3 +2,4 @@ node_modules
 .turbo
 src/icons/
 dist/
+root_icons/

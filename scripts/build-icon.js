@@ -11,14 +11,18 @@ import fs from "fs"
     const TARGET_INDEX_FILE = path.resolve("./dist/esm/icons/index.js");
     // const files = [];
     
-    const files = fs.readdirSync(ROOT_DIR).filter((file) => file !== "index.js" && !file.includes(".d.ts")).map(it => {
+    let files = fs.readdirSync(ROOT_DIR)
+
+    files = files.filter((file) => file !== "index.js" && !file.includes(".d.ts")).map(it => {
         return { name: `icons/${it.replace(".jsx", "")}`, file: `icons/${it}` };
     });
+
+    // console.log(JSON.stringify(files, null, 4))
 
     files.push({ name: 'components/SvgIcon', file: 'components/SvgIcon.jsx' });
     // files.push({ name: 'icons/index', file: 'icons/index.js' })
 
-    // const input = {}
+    // // const input = {}
     const libs = files;
 
     await libs.forEach(async (item) => {

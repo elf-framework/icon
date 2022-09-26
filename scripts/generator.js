@@ -17,7 +17,7 @@ const filteredTheme = {
   'outlined': true,
   'filled': true
 }
-const filterCategoryList = ['content', 'editor', 'action', 'navigation']
+const filterCategoryList = ['content', 'editor', 'file', "Text Formatting", "Photo\u0026Image", 'action', 'navigation', "Common actions"]
 
 // how to get material icon list 
 // https://fonts.google.com/metadata/icons?key=material_symbols&incomplete=true
@@ -41,8 +41,10 @@ getMaterialIconList();
 
 const ROOT_DIR = "./node_modules/@material-design-icons/svg";
 const SRC_DIR = "./src";
+const TEMPLATE_DIR = "./template";
 
 const ICONS_DIR = SRC_DIR + "/icons"
+const ICONS_ROOT_DIR = TEMPLATE_DIR + "/root_icons"
 
 
 function umdTemplate(fullName, json) {
@@ -67,6 +69,12 @@ function declarationTS(fullName, json) {
   `
 }
 
+function rootDeclarationTS(fullName, json) {
+  return `
+  export { default } from "./esm/icons/${fullName}";
+  `
+}
+
 function srcTemplate(fullName, json) {
   return `
 // GENERATE BY ./scripts/generator.js
@@ -80,6 +88,12 @@ const  ${fullName} = (props = {}) => {
 ${fullName}.displayName = "${fullName}";
 
 export default ${fullName};
+          `;
+}
+
+function rootSrcTemplate(fullName, json) {
+  return `
+  export { default } from "./esm/icons/${fullName}";
           `;
 }
 
@@ -115,6 +129,7 @@ fs.readdirSync(ROOT_DIR, { withFileTypes: true })
 
     const localDir = path.join(ROOT_DIR, dir.name);
     const srcDir = path.join(ICONS_DIR);
+    const srcRootDir = path.join(ICONS_ROOT_DIR);
 
 
     rootFiles.push(dir.name);
@@ -126,6 +141,7 @@ fs.readdirSync(ROOT_DIR, { withFileTypes: true })
       .join("");
 
     makeDirectory(srcDir);
+    makeDirectory(srcRootDir);
 
 
     const localList = fs.readdirSync(localDir);
@@ -154,7 +170,8 @@ fs.readdirSync(ROOT_DIR, { withFileTypes: true })
       const iconName = targetFileName + typeName;
       const targetFile = path.join(srcDir, iconName + ".jsx");
       const targetFileTS = path.join(srcDir, iconName + ".d.ts");
-
+      const targetRootFile = path.join(srcRootDir, iconName + ".js");
+      const targetRootFileTS = path.join(srcRootDir, iconName + ".d.ts");
 
       const source = fs.readFileSync(sourceFile, "utf8");
 
@@ -172,6 +189,12 @@ fs.readdirSync(ROOT_DIR, { withFileTypes: true })
 
       const dts = declarationTS(iconName, data);
       fs.writeFileSync(targetFileTS, dts);
+
+      const rootTemplate = rootSrcTemplate(iconName, data);
+      fs.writeFileSync(targetRootFile, rootTemplate);      
+
+      const rootDts = rootDeclarationTS(iconName, data);
+      fs.writeFileSync(targetRootFileTS, rootDts);            
 
 
       indexFiles.push(`export { default as ${iconName} } from "./${iconName}";`);

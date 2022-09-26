@@ -1,54 +1,47 @@
 {
   "name": "@elf-framework/icon",
-  "version": "2.0.50",
+  "version": "2.0.62",
   "description": "Fantastic Icon library",
   "types": "./index.d.ts",
   "type": "module",
   "sideEffects": false,
   "main": "./umd/index.js",
   "module": "./index.js",
-  "exports": {
-    ".": {
-      "import": "./index.js",
-      "require": "./umd/index.js"
-    },
-    "./esm/": "./esm/icons/"
-  },
   "peerDependencies": {
-    "@elf-framework/sapa": "^2.0.34"
+    "@elf-framework/sapa": "^2.1.15"
   },
   "dependencies": {
-    "@elf-framework/sapa": "^2.0.34"
+    "@elf-framework/sapa": "^2.1.15"
   },
   "devDependencies": {
-    "@elf-framework/sapa": "^2.0.34",
-    "@changesets/cli": "^2.23.2",
-    "@changesets/changelog-git": "^0.1.11",
-    "@changesets/changelog-github": "^0.4.5",
-    "@material-design-icons/svg": "^0.11.4",
+    "@elf-framework/sapa": "^2.1.15",
+    "@changesets/cli": "^2.24.3",
+    "@changesets/changelog-git": "^0.1.12",
+    "@changesets/changelog-github": "^0.4.6",
+    "@material-design-icons/svg": "^0.12.0",
     "@rgrove/parse-xml": "^3.0.0",
     "changeset": "^0.2.6",
-    "eslint": "^8.14.0",
-    "vite": "^2.9.1",
-    "vitest": "0.0.107"
+    "eslint": "^8.23.0",
+    "vite": "^3.0.9",
+    "vitest": "0.22.1"
   },
   "scripts": {
     "vite:dist": "vite build --config=vite.dist.config.js",
     "watch": "vite build --config=vite.dist.config.js --watch",
     "blank:watch": "npm run watch",
-    "//dev": "npm run vite:dist:watch",
     "release": "release-it *",
     "build": "npm run vite:dist",
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "//prepare": "husky install",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --fix src",
     "format": "prettier .  --write",
     "clean": "rm -rf ./src/icons/* ./dist/esm/icons/* ./dist/umd/icons/* ",
     "generate": "npm run clean && node scripts/generator.js",
     "build:icon": "node scripts/build-icon.js",
+    "copy:lib": "cp -R src/components src/icons src/index.js dist/lib/",
     "copy:type": "cp -R src/icons/*.ts dist/esm/icons",
-    "publish-copy": "mkdir -p dist/lib && cp -R src/* dist/lib/ && cp -R src/icons/index.js dist/esm/icons && npm run copy:type && cp -R template/index.js dist",
+    "copy:root": "cp -R template/index.js dist && cp -R template/root_icons/* dist",
+    "publish-copy": "mkdir -p dist/lib && npm run copy:lib && cp -R src/icons/index.js dist/esm/icons && npm run copy:type && npm run copy:root",
     "pack": "npm run publish-copy && cp package.json dist/ && cd dist && npm pack",
     "pub": "npm run publish-copy && cp package.json dist/ && cd dist && npm publish",
     "changeset": "changeset",
