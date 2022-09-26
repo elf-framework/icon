@@ -1,5 +1,11 @@
 # @elf-framework/icon
 
+## 2.1.0
+
+### Minor Changes
+
+- update icon list
+
 ## 2.0.62
 
 ### Patch Changes
