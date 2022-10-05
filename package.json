@@ -1,6 +1,6 @@
 {
   "name": "@elf-framework/icon",
-  "version": "2.1.0",
+  "version": "0.0.3",
   "description": "Icon library for sapa that use material icons",
   "types": "./index.d.ts",
   "type": "module",
