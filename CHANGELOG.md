@@ -1,5 +1,23 @@
 # @elf-framework/icon
 
+## 0.0.7
+
+### Patch Changes
+
+- add android category
+
+## 0.0.6
+
+### Patch Changes
+
+- update icon list
+
+## 0.0.5
+
+### Patch Changes
+
+- modify addchart to add_chart
+
 ## 2.1.0
 
 ### Minor Changes

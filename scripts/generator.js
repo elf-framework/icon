@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import parseXml from "@rgrove/parse-xml";
+import {parseXml} from "@rgrove/parse-xml";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -11,13 +11,16 @@ const files = {
 
 };
 
-
+// alias for icon name
+const iconNames = {
+  'addchart': 'add_chart',
+}
 
 const filteredTheme = {
   'outlined': true,
   'filled': true
 }
-const filterCategoryList = ['content', 'editor', 'file', "Text Formatting", "Photo\u0026Image", 'action', 'navigation', "Common actions"]
+const filterCategoryList = ['content', 'Android', 'editor', 'file', "Text Formatting", "Photo\u0026Image", 'action', 'navigation', "Common actions"]
 
 // how to get material icon list 
 // https://fonts.google.com/metadata/icons?key=material_symbols&incomplete=true
@@ -27,9 +30,14 @@ function getMaterialIconList() {
   const list = iconJSON.icons.filter(it => it.categories.some(c => filterCategoryList.includes(c)));
 
   return list.map(it => {
-    files[it.name] = true;
+
+    const name = it.name;
+    const key = iconNames[name] || name;
+
+    files[name] = true;
     return {
-      name: it.name,
+      name: key,
+      originName: name,
       categories: it.categories,
     }
   });
@@ -156,18 +164,22 @@ fs.readdirSync(ROOT_DIR, { withFileTypes: true })
       }
       // console.log(filename);
 
-
       if (!files[filename]) {
         return;
       }
 
 
       const sourceFile = path.join(localDir, file);
+
+      // alias 적용 
+      componentName = iconNames[componentName] || componentName;      
+
       const targetFileName = componentName
         .split(/[_-]/g)
         .map((it) => capitalizeFirstLetter(it))
         .join("");
       const iconName = targetFileName + typeName;
+
       const targetFile = path.join(srcDir, iconName + ".jsx");
       const targetFileTS = path.join(srcDir, iconName + ".d.ts");
       const targetRootFile = path.join(srcRootDir, iconName + ".js");
