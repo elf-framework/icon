@@ -17,8 +17,6 @@ import fs from "fs"
         return { name: `icons/${it.replace(".jsx", "")}`, file: `icons/${it}` };
     });
 
-    // console.log(JSON.stringify(files, null, 4))
-
     files.push({ name: 'components/SvgIcon', file: 'components/SvgIcon.jsx' });
     // files.push({ name: 'icons/index', file: 'icons/index.js' })
 
@@ -37,7 +35,7 @@ import fs from "fs"
 
             build: {
                 emptyOutDir: false,
-                // minify: true,
+                minify: false,
                 lib: {
                     entry: `./src/${item.file}`,
                     name: item.name,
@@ -59,7 +57,7 @@ import fs from "fs"
                         // Provide global variables to use in the UMD build
                         // for externalized deps
                         globals: {
-                            "../componennts/SvgIcon": "SvgIcon",
+                            "../components/SvgIcon": "SvgIcon",
                             "@elf-framework/sapa": "sapa",
                         },
                     },

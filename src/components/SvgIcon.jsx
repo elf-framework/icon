@@ -3,6 +3,11 @@ function makeElement (node) {
 }
 
 export function SvgIcon (node, props = {}){
+
+    if (props.width && !props.height) {
+        props.height = props.width;
+    }
+
     return <span class={`elf--icon ${node.theme}`} data-name={node.name}>
         <svg 
             {...node.icon.attributes}

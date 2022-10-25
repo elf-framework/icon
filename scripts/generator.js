@@ -61,6 +61,8 @@ function umdTemplate(fullName, json) {
 
 function declarationTS(fullName, json) {
   return `
+  // GENERATE BY ./scripts/generator.js
+  // DON NOT EDIT IT MANUALLY    
   import {UIElement} from '@elf-framework/sapa';
 
   interface ${fullName}Props {
